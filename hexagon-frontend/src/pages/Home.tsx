@@ -18,7 +18,6 @@ interface Pessoa {
 const Home = () => {
   const [data, setData] = useState<Pessoa[]>([]);
 
-  // Carregar os dados na inicialização
   useEffect(() => {
     fetchData().then(setData);
   }, []);
@@ -58,7 +57,7 @@ const Home = () => {
   };
 
   return (
-    <div>
+    <div id="content-container">
       <div id="logo-container">
         <img src={logotipo} width="50" alt="logotipo empresa"></img>
         <h1>Teste Hexagon</h1>

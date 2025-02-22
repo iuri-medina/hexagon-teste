@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/Users/iurimedina/Documents/hexagonAPI/hexagonAPI.csproj": {}
+    "/Users/iurimedina/Documents/hexagon-teste/hexagonAPI/hexagonAPI.csproj": {}
   },
   "projects": {
-    "/Users/iurimedina/Documents/hexagonAPI/hexagonAPI.csproj": {
+    "/Users/iurimedina/Documents/hexagon-teste/hexagonAPI/hexagonAPI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/iurimedina/Documents/hexagonAPI/hexagonAPI.csproj",
+        "projectUniqueName": "/Users/iurimedina/Documents/hexagon-teste/hexagonAPI/hexagonAPI.csproj",
         "projectName": "hexagonAPI",
-        "projectPath": "/Users/iurimedina/Documents/hexagonAPI/hexagonAPI.csproj",
+        "projectPath": "/Users/iurimedina/Documents/hexagon-teste/hexagonAPI/hexagonAPI.csproj",
         "packagesPath": "/Users/iurimedina/.nuget/packages/",
-        "outputPath": "/Users/iurimedina/Documents/hexagonAPI/obj/",
+        "outputPath": "/Users/iurimedina/Documents/hexagon-teste/hexagonAPI/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/Users/iurimedina/.nuget/NuGet/NuGet.Config"

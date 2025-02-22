@@ -2,7 +2,7 @@ const API_URL = "http://localhost:5281/api/pessoa";
 export async function fetchData() {
     const response = await fetch(`${API_URL}`);
     const data = await response.json();
-    console.log("Dados recebidos:", data); // Verifica o formato no console
+    console.log("Dados recebidos:", data); 
     return data;
   }
 

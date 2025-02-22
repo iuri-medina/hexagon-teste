@@ -11,7 +11,8 @@ const formatCPF = (value: string) => {
 const validateCPF = (cpf: string) => {
   const cleanedCPF = cpf.replace(/\D/g, "");
   if (cleanedCPF.length !== 11 || /^(\d)\1{10}$/.test(cleanedCPF)) return false;
-  let sum = 0, remainder;
+  let sum = 0,
+    remainder;
   for (let i = 1; i <= 9; i++) sum += parseInt(cleanedCPF[i - 1]) * (11 - i);
   remainder = (sum * 10) % 11;
   if (remainder !== parseInt(cleanedCPF[9])) return false;
@@ -22,7 +23,11 @@ const validateCPF = (cpf: string) => {
 };
 
 const capitalizeWords = (str: string) => {
-  return str.toLowerCase().split(" ").map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(" ");
+  return str
+    .toLowerCase()
+    .split(" ")
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(" ");
 };
 
 const Form = ({ onSubmit, initialData }: any) => {
@@ -41,13 +46,26 @@ const Form = ({ onSubmit, initialData }: any) => {
     }
   }, [initialData]);
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  // Função para limpar o formulário
+  const clearForm = () => {
+    setFormData({
+      nome: "",
+      idade: "",
+      estadoCivil: "",
+      cpf: "",
+      cidade: "",
+      estado: "",
+    });
+  };
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!validateCPF(formData.cpf)) {
       alert("Por favor, preencha um CPF válido.");
       return;
     }
-    onSubmit(formData);
+    await onSubmit(formData); // Aguarda a conclusão da função onSubmit
+    clearForm(); // Limpa o formulário após o envio
   };
 
   return (
@@ -56,7 +74,9 @@ const Form = ({ onSubmit, initialData }: any) => {
         type="text"
         placeholder="Nome"
         value={formData.nome}
-        onChange={(e) => setFormData({ ...formData, nome: capitalizeWords(e.target.value) })}
+        onChange={(e) =>
+          setFormData({ ...formData, nome: capitalizeWords(e.target.value) })
+        }
       />
       <input
         type="number"
@@ -67,9 +87,13 @@ const Form = ({ onSubmit, initialData }: any) => {
       <select
         name="estadoCivil"
         value={formData.estadoCivil}
-        onChange={(e) => setFormData({ ...formData, estadoCivil: e.target.value })}
+        onChange={(e) =>
+          setFormData({ ...formData, estadoCivil: e.target.value })
+        }
       >
-        <option value="" disabled>Escolher Estado Civil</option>
+        <option value="" disabled>
+          Escolher Estado Civil
+        </option>
         <option value="Solteiro(a)">Solteiro(a)</option>
         <option value="Casado(a)">Casado(a)</option>
         <option value="Divorciado(a)">Divorciado(a)</option>
@@ -86,14 +110,18 @@ const Form = ({ onSubmit, initialData }: any) => {
         type="text"
         placeholder="Cidade"
         value={formData.cidade}
-        onChange={(e) => setFormData({ ...formData, cidade: capitalizeWords(e.target.value) })}
+        onChange={(e) =>
+          setFormData({ ...formData, cidade: capitalizeWords(e.target.value) })
+        }
       />
       <select
         name="estado"
         value={formData.estado}
         onChange={(e) => setFormData({ ...formData, estado: e.target.value })}
       >
-        <option value="" disabled>Escolher Estado</option>
+        <option value="" disabled>
+          Escolher Estado
+        </option>
         <option value="AC">Acre</option>
         <option value="AL">Alagoas</option>
         <option value="AP">Amapá</option>
@@ -106,7 +134,7 @@ const Form = ({ onSubmit, initialData }: any) => {
         <option value="MA">Maranhão</option>
         <option value="MT">Mato Grosso</option>
         <option value="MS">Mato Grosso do Sul</option>
-        <option value="MG">Minas Gerais</option>
+        <option value="MG">Minhas Gerais</option>
         <option value="PA">Pará</option>
         <option value="PB">Paraíba</option>
         <option value="PR">Paraná</option>
@@ -122,7 +150,7 @@ const Form = ({ onSubmit, initialData }: any) => {
         <option value="SE">Sergipe</option>
         <option value="TO">Tocantins</option>
       </select>
-      <button type="submit">Salvar</button>
+      <button type="submit">Adicionar</button>
     </form>
   );
 };
