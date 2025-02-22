@@ -8,18 +8,35 @@ const formatCPF = (value: string) => {
     .replace(/(\d{3})(\d{1,2})$/, "$1-$2");
 };
 
-const validateCPF = (cpf: string) => {
-  const cleanedCPF = cpf.replace(/\D/g, "");
-  if (cleanedCPF.length !== 11 || /^(\d)\1{10}$/.test(cleanedCPF)) return false;
-  let sum = 0,
-    remainder;
-  for (let i = 1; i <= 9; i++) sum += parseInt(cleanedCPF[i - 1]) * (11 - i);
-  remainder = (sum * 10) % 11;
-  if (remainder !== parseInt(cleanedCPF[9])) return false;
+const validateCPF = (cpf: string): boolean => {
+  const cleanedCPF = cpf.replace(/\D/g, '');
+
+  if (cleanedCPF.length !== 11 || /^(\d)\1{10}$/.test(cleanedCPF)) {
+    return false;
+  }
+
+  let sum = 0;
+  for (let i = 0; i < 9; i++) {
+    sum += parseInt(cleanedCPF[i]) * (10 - i);
+  }
+  let remainder = (sum * 10) % 11;
+  if (remainder === 10) remainder = 0; 
+  if (remainder !== parseInt(cleanedCPF[9])) {
+    return false;
+  }
+
+
   sum = 0;
-  for (let i = 1; i <= 10; i++) sum += parseInt(cleanedCPF[i - 1]) * (12 - i);
+  for (let i = 0; i < 10; i++) {
+    sum += parseInt(cleanedCPF[i]) * (11 - i);
+  }
   remainder = (sum * 10) % 11;
-  return remainder === parseInt(cleanedCPF[10]);
+  if (remainder === 10) remainder = 0; 
+  if (remainder !== parseInt(cleanedCPF[10])) {
+    return false;
+  }
+
+  return true;
 };
 
 const capitalizeWords = (str: string) => {
@@ -46,7 +63,6 @@ const Form = ({ onSubmit, initialData }: any) => {
     }
   }, [initialData]);
 
-  // Função para limpar o formulário
   const clearForm = () => {
     setFormData({
       nome: "",
@@ -64,8 +80,8 @@ const Form = ({ onSubmit, initialData }: any) => {
       alert("Por favor, preencha um CPF válido.");
       return;
     }
-    await onSubmit(formData); // Aguarda a conclusão da função onSubmit
-    clearForm(); // Limpa o formulário após o envio
+    await onSubmit(formData); 
+    clearForm(); 
   };
 
   return (
