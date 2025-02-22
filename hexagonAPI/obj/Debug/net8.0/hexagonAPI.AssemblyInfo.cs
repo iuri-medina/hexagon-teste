@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("hexagonAPI")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+a09f4ade5f9950820a31856d92845a044688e9f6")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+02348a588bc5b6ba84e88061a2da104510a1ab76")]
 [assembly: System.Reflection.AssemblyProductAttribute("hexagonAPI")]
 [assembly: System.Reflection.AssemblyTitleAttribute("hexagonAPI")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

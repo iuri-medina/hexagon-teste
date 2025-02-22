@@ -1,10 +1,9 @@
 const API_URL = "http://localhost:5281/api/pessoa";
-export async function fetchData() {
-    const response = await fetch(`${API_URL}`);
-    const data = await response.json();
-    console.log("Dados recebidos:", data); 
-    return data;
-  }
+export async function fetchData(page: number, pageSize: number) {
+  const response = await fetch(`${API_URL}?page=${page}&pageSize=${pageSize}`);
+  const data = await response.json();
+  return data;
+}
 
 export async function addItem(item: any): Promise<any> {
   const response = await fetch(API_URL, {

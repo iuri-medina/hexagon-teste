@@ -6,66 +6,57 @@ import "../styles.css";
 import logotipo from "../assets/logotipo.png";
 
 interface Pessoa {
-  id: number;
-  nome: string;
-  idade: number;
-  estadoCivil: string;
-  cpf: string;
-  cidade: string;
-  estado: string;
+    id: number;
+    nome: string;
+    idade: number;
+    estadoCivil: string;
+    cpf: string;
+    cidade: string;
+    estado: string;
 }
 
 const Home = () => {
-  const [data, setData] = useState<Pessoa[]>([]);
+    const [data, setData] = useState<Pessoa[]>([]);
+    const [currentPage, setCurrentPage] = useState(1); // Página atual
+    const [pageSize, setPageSize] = useState(10); // Itens por página
 
-  useEffect(() => {
-    fetchData().then(setData);
-  }, []);
+    // Carregar os dados na inicialização e ao mudar a página
+    useEffect(() => {
+        fetchData(currentPage, pageSize).then(setData);
+    }, [currentPage, pageSize]);
 
-  // Atualizar os dados na tabela após adicionar um novo item
-  const handleAddItem = async (pessoa: Pessoa) => {
-    try {
-      const newPessoa = await addItem(pessoa);
-      if (newPessoa) {
-        setData((prevData) => [...prevData, newPessoa]); // Atualiza a tabela sem recarregar
-      }
-    } catch (error) {
-      console.error("Erro ao adicionar item:", error);
-    }
-  };
+    // Função para mudar de página
+    const handlePageChange = (newPage: number) => {
+        setCurrentPage(newPage);
+    };
 
-  // Atualizar os dados na tabela após editar um item
-  const handleUpdate = async (id: number, pessoa: Pessoa) => {
-    try {
-      await updateItem(id, pessoa);
-      setData((prevData) =>
-        prevData.map((p) => (p.id === id ? { ...pessoa } : p)) // Atualiza os dados no estado
-      );
-    } catch (error) {
-      console.error("Erro ao atualizar item:", error);
-    }
-  };
+    return (
+        <div>
+            <div id="logo-container">
+                <img src={logotipo} width="50" alt="logotipo empresa"></img>
+                <h1>Teste Hexagon</h1>
+            </div>
+            <Form onSubmit={addItem} />
+            <Table data={data} onEdit={updateItem} onDelete={deleteItem} />
 
-  // Atualizar os dados na tabela após excluir um item
-  const handleDelete = async (id: number) => {
-    try {
-      await deleteItem(id);
-      setData((prevData) => prevData.filter((p) => p.id !== id)); // Remove o item da tabela sem recarregar
-    } catch (error) {
-      console.error("Erro ao excluir item:", error);
-    }
-  };
-
-  return (
-    <div id="content-container">
-      <div id="logo-container">
-        <img src={logotipo} width="50" alt="logotipo empresa"></img>
-        <h1>Teste Hexagon</h1>
-      </div>
-      <Form onSubmit={handleAddItem} />
-      <Table data={data} onEdit={handleUpdate} onDelete={handleDelete} />
-      </div>
-  );
+            {/* Controles de Paginação */}
+            <div className="pagination">
+                <button
+                    onClick={() => handlePageChange(currentPage - 1)}
+                    disabled={currentPage === 1}
+                >
+                    Anterior
+                </button>
+                <span>Página {currentPage}</span>
+                <button
+                    onClick={() => handlePageChange(currentPage + 1)}
+                    disabled={data.length < pageSize} // Desabilita se não houver mais dados
+                >
+                    Próxima
+                </button>
+            </div>
+        </div>
+    );
 };
 
 export default Home;

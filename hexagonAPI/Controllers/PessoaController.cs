@@ -15,20 +15,20 @@ public class PessoaController : ControllerBase
 
     // GET: api/pessoa
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<Pessoa>>> GetPessoas()
-    {
-        return await _context.Pessoas.ToListAsync();
-    }
+public async Task<IActionResult> GetPessoa(int page = 1, int pageSize = 10)
+{
+    // Calcular o número de registros a serem ignorados
+    int skip = (page - 1) * pageSize;
 
-    // GET: api/pessoa/{id}
-    [HttpGet("{id}")]
-    public async Task<ActionResult<Pessoa>> GetPessoa(int id)
-    {
-        var pessoa = await _context.Pessoas.FindAsync(id);
-        if (pessoa == null)
-            return NotFound();
-        return pessoa;
-    }
+    // Buscar os registros paginados no banco de dados
+    var pessoas = await _context.Pessoas
+        .Skip(skip)
+        .Take(pageSize)
+        .ToListAsync();
+
+    // Retornar os dados paginados
+    return Ok(pessoas);
+}
 
     // POST: api/pessoa
     [HttpPost]
