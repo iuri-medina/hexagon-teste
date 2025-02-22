@@ -92,7 +92,7 @@ const Form = ({ onSubmit, initialData }: any) => {
         }
       >
         <option value="" disabled>
-          Escolher Estado Civil
+          Estado Civil
         </option>
         <option value="Solteiro(a)">Solteiro(a)</option>
         <option value="Casado(a)">Casado(a)</option>
@@ -120,7 +120,7 @@ const Form = ({ onSubmit, initialData }: any) => {
         onChange={(e) => setFormData({ ...formData, estado: e.target.value })}
       >
         <option value="" disabled>
-          Escolher Estado
+          Estado
         </option>
         <option value="AC">Acre</option>
         <option value="AL">Alagoas</option>

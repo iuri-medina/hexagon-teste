@@ -89,6 +89,7 @@
   
   /* Tabela */
   table {
+    min-width: 1163px;
     width: fit-content;
     background: var(--background-color);
     border-collapse: collapse;
