@@ -131,6 +131,16 @@ O projeto foi desenvolvido com foco em boas práticas de desenvolvimento, como c
 <img width="1252" alt="image" src="https://github.com/user-attachments/assets/07c27135-1e46-409d-893e-7a2e3b397114" />
 
 
+### Como executar o projeto:
+
+ - **FrontEnd**:
+    - Ir na pasta hexagon-frontend, baixar as dependencias do react e executar o projeto com o comando `npm start`
+    - O projeto estará no endereço `http://localhost:3000`
+ 
+ - **BackEnd**
+    - Com o ASP.net instalado, ir na pasta hexagonAPI e executar o comando `dotnet run`
+    - A API estará no endereço `http://localhost:5281`
+
 ### Script SQL para Inserção de Dados Fictícios
 
 INSERT INTO bancotestehexagon.Pessoas (Nome, Idade, EstadoCivil, CPF, Cidade, Estado)
